@@ -40,5 +40,5 @@ text= driver.find_element(By.TAG_NAME,'pre').text
 data = json.loads(text)
 datasets = data['datasets']
 with open('./datasets.json', 'w') as f:
-    f.write(datasets)
+    f.write(json.dumps(datasets))
 
