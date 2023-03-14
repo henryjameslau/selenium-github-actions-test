@@ -1,10 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 import chromedriver_autoinstaller
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
-display.start()
+import json
+# from pyvirtualdisplay import Display
+# display = Display(visible=0, size=(800, 800))  
+# display.start()
 
 chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
@@ -14,10 +16,10 @@ chrome_options = webdriver.ChromeOptions()
 # Add your options as needed    
 options = [
   # Define window size here
-   "--window-size=1200,1200",
-    "--ignore-certificate-errors"
+    #"--window-size=1200,1200",
+    # "--ignore-certificate-errors"
  
-    #"--headless",
+    "--headless=new",
     #"--disable-gpu",
     #"--window-size=1920,1200",
     #"--ignore-certificate-errors",
@@ -33,8 +35,10 @@ for option in options:
     
 driver = webdriver.Chrome(options = chrome_options)
 
-driver.get('http://github.com')
-print(driver.title)
-with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"This was written with a GitHub action {driver.title}")
+driver.get('https://corsproxy.io/?https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/consumerpriceindicescpiandretailpricesindexrpiitemindicesandpricequotes/data')
+text= driver.find_element(By.TAG_NAME,'pre').text
+data = json.loads(text)
+datasets = data['datasets']
+with open('./datasets.json', 'w') as f:
+    f.write(datasets)
 
