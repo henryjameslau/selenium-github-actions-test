@@ -54,6 +54,7 @@ if (file.read() != date):
        
         print("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
         driver.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
+
         # closing browser
         driver.close()
 
