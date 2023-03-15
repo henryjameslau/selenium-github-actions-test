@@ -45,14 +45,14 @@ items = data['datasets'][match]['uri']
 date=split(items,'itemindices',2)[1]
 
 if (file.read() != date):
-    # with webdriver.Chrome(options= chrome_options) as driver: 
-    #     driver.get("https://corsproxy.io/?https://www.ons.gov.uk"+items+"/data")
+    with webdriver.Chrome(options= chrome_options) as driver: 
+        driver.get("https://corsproxy.io/?https://www.ons.gov.uk"+items+"/data")
 
-    #     itemsurl= driver.find_element(By.TAG_NAME,'pre').text
-    #     itemspage = json.loads(itemsurl)
-    #     csv = itemspage['downloads'][0]['file']
+        itemsurl= driver.find_element(By.TAG_NAME,'pre').text
+        itemspage = json.loads(itemsurl)
+        csv = itemspage['downloads'][0]['file']
        
-    #     print("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
+        print("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
     #     driver.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
 
     #     # closing browser
