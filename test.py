@@ -6,6 +6,7 @@ import chromedriver_autoinstaller
 import json
 import requests
 import pandas as pd
+import io
 
 # define a function to split a string at a certain occurance of a separator
 
@@ -62,7 +63,7 @@ if (file.read() != date):
     with requests.Session() as s:
         download = s.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv,headers={'User-Agent': 'Mozilla/5.0'})
         
-        read=pd.read_csv(download.content.decode('utf-8'))
+        read=pd.read_csv(io.StringIO(download.content.decode('utf-8')))
         read.to_csv(csv)
 #     file.write(date)
 
