@@ -56,8 +56,11 @@ if (file.read() != date):
     #     driver.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv)
 
     #     # closing browser
-    #     driver.close()
-    requests.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv,headers={'User-Agent': 'Mozilla/5.0'})
+        driver.close()
+    
+    with requests.Session() as s:
+        download = s.get("https://corsproxy.io/?https://www.ons.gov.uk/file?uri="+items+"/"+csv,headers={'User-Agent': 'Mozilla/5.0'})
+        download.to_csv(csv)
 
 
 #     file.write(date)
